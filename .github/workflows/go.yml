@@ -44,7 +44,7 @@ jobs:
         # At what percentage does the badge become green instead of yellow (default: 70)
         green: 80
         # Target file (default "README.md")
-        target: README.md
+        target: ./README.md
         # Text on the left side of the badge (default: "Coverage")
         text: Coverage
         # Text on the right side of the badge
