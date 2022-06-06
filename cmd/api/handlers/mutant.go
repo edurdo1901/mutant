@@ -47,13 +47,13 @@ func ismutant(m Mutant) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		var dna DnaRequest
 		if err := c.ShouldBindJSON(&dna); err != nil {
-			c.Error(err)
+			_ = c.Error(err)
 			return
 		}
 
 		result, err := m.IsMutant(c.Request.Context(), dna.Dna)
 		if err != nil {
-			c.Error(err)
+			_ = c.Error(err)
 			return
 		}
 
@@ -96,7 +96,7 @@ func stats(mutant Mutant) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		result, err := mutant.Stats(c.Request.Context())
 		if err != nil {
-			c.Error(err)
+			_ = c.Error(err)
 			return
 		}
 

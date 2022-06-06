@@ -3,5 +3,5 @@ package dnastore
 import "context"
 
 func DropCollection(client *DnaStore, ctx context.Context) {
-	client.repository.Drop(ctx)
+	_ = client.repository.Drop(ctx)
 }

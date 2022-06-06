@@ -198,6 +198,6 @@ func setupMock(params mockArgs, mock *mock.Mock) {
 	if params.methodName != "" {
 		mock.On(params.methodName, params.inputArgs...).
 			Return(params.returnArgs...).
-			Times(1)
+			Times(params.times)
 	}
 }
