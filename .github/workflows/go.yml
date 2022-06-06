@@ -21,5 +21,11 @@ jobs:
     - name: Build
       run: go build -v ./...
 
+    - name: Setup Go environment
+      uses: actions/setup-go@v3.2.0
+      with:
+        # The Go version to download (if necessary) and use. Supports semver spec and ranges.
+        conectionString: "mongodb://githubtest:GfRZffHCjWjOdcouDrv7KCq4t79uc7oEbNJnID6Fd7hml2SUmg47pSVhqCLzfmcnECa9XaFNyq0YL1WOl2wtOA==@githubtest.mongo.cosmos.azure.com:10255/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@githubtest@"
+    
     - name: Test
       run: go test -v ./...
