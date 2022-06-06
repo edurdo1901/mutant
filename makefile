@@ -6,8 +6,8 @@ test-docker:
 	@docker-compose down -v
 
 test-cover:
-	@go test ./... -covermode=atomic -coverprofile=tmp/coverage.out -coverpkg=./... -count=1
-	@go tool cover -html=tmp/coverage.out
+	@go test ./... -covermode=atomic -coverprofile=coverage.out -coverpkg=./... -count=1
+	@go tool cover -html=coverage.out
 
 fmt:	
 	@echo "==> Running format"
