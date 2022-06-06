@@ -1,0 +1,131 @@
+basePath: /
+consumes:
+- application/json
+definitions:
+  DnaRequest:
+    properties:
+      dna:
+        description: Dna dna information.
+        example:
+        - ATGCGA
+        - CAGTGC
+        - TTATGT
+        - AGAAGG
+        - CCCCTA
+        - TCACTG
+        items:
+          type: string
+        type: array
+        x-go-name: Dna
+    required:
+    - dna
+    type: object
+    x-go-package: prueba.com/cmd/api/handlers
+  Error:
+    properties:
+      code:
+        description: Code code error.
+        type: string
+        x-go-name: Code
+      message:
+        description: Message message error.
+        type: string
+        x-go-name: Message
+    type: object
+    x-go-package: prueba.com/cmd/api/handlers
+  StatsResponse:
+    properties:
+      count_human_dna:
+        description: CountHuman number of humans processed.
+        format: int64
+        type: integer
+        x-go-name: CountHuman
+      count_mutant_dna:
+        description: CountMutant number of mutants processed.
+        format: int64
+        type: integer
+        x-go-name: CountMutant
+      ratio:
+        description: Ratio relationship between (mutants/humans).
+        format: double
+        type: number
+        x-go-name: Ratio
+    type: object
+    x-go-package: prueba.com/internal/mutant
+host: challenge-golang.gentlesea-9f37728d.westus.azurecontainerapps.io
+info:
+  description: |-
+    The Mutant is API Recruit the most mutants to be able to fight
+    against the X-Men.
+  title: Magneto API.
+  version: 1.0.0
+paths:
+  /mutant:
+    post:
+      description: returns 200 if it is mutant and 403 if it is human
+      operationId: ismutant
+      parameters:
+      - description: information DNA
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/DnaRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: the entered DNA is mutant
+        "403":
+          description: the entered DNA is humant
+        "422":
+          description: error in the DNA entered
+          examples:
+            application/json:
+              code: Unprocessable Entity
+              message: 'mutant: invalid length dna'
+          schema:
+            $ref: '#/definitions/Error'
+        "500":
+          description: unknown error
+          examples:
+            application/json:
+              code: Internal Server Error
+              message: unknown error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: validates if the entered DNA is mutant
+      tags:
+      - ismutant
+  /stats:
+    get:
+      description: returns the statistics of the processed adns
+      operationId: stats
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: returns the statistics of the processed adns
+          examples:
+            application/json:
+              count_human_dna: 100
+              count_mutant_dna: 40
+              ratio: 0.4
+          schema:
+            $ref: '#/definitions/StatsResponse'
+        "500":
+          description: unknown error
+          examples:
+            application/json:
+              code: Internal Server Error
+              message: unknown error
+          schema:
+            $ref: '#/definitions/Error'
+      summary: the statistics of the processed adns
+      tags:
+      - stats
+produces:
+- application/json
+schemes:
+- https
+swagger: "2.0"

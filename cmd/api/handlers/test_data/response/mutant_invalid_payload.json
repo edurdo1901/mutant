@@ -1,0 +1,4 @@
+{
+    "code": "Unprocessable Entity",
+    "message": "Key: 'DnaRequest.Dna' Error:Field validation for 'Dna' failed on the 'min' tag"
+}
