@@ -29,7 +29,10 @@ func main() {
 	initPrometheus(r)
 	handler := handlers.New(mutant)
 	handler.API(r)
-	r.Run(":" + port)
+	err = r.Run(":" + port)
+	if err != nil {
+		panic(err)
+	}
 }
 
 // initPrometheus start Prometheus metrics.

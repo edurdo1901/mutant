@@ -2,11 +2,14 @@ package mutant_test
 
 import (
 	"context"
+	"encoding/json"
 	"errors"
+	"os"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
+	"github.com/stretchr/testify/require"
 	"prueba.com/internal/dnastore"
 	"prueba.com/internal/mutant"
 )
@@ -53,6 +56,7 @@ func TestIsMutant(t *testing.T) {
 			times:      1,
 		},
 	}
+	dna := loadJSON(t, "test_data/dna_big.json")
 
 	tt := map[string]struct {
 		dna            []string
@@ -62,6 +66,11 @@ func TestIsMutant(t *testing.T) {
 	}{
 		"MutantIsTrue": {
 			dna:            []string{"ATGCGA", "CAGTGC", "TTATGT", "AGAAGG", "CCCCTA", "TCACTG"},
+			expectedMutant: true,
+			sMock:          sMockDefault,
+		},
+		"MutantIsTruebigDNA": {
+			dna:            dna,
 			expectedMutant: true,
 			sMock:          sMockDefault,
 		},
@@ -78,7 +87,7 @@ func TestIsMutant(t *testing.T) {
 					methodName: "Find",
 					inputArgs:  []interface{}{ctx, mock.Anything},
 					returnArgs: []interface{}{dnastore.DnaModel{
-						Hash: "08129510eee94be205644d23eae66988eb34c23bde9ea9daf4b9b6e72a0006ac",
+						Hash: "ATGCGACAGTGCTTATGTAGAGGGCCCCTATCACTG",
 					}, nil},
 					times: 1,
 				},
@@ -150,6 +159,15 @@ func TestIsMutant(t *testing.T) {
 	}
 }
 
+func loadJSON(t *testing.T, fileName string) []string {
+	var dna []string
+	data, err := os.ReadFile(fileName)
+	require.NoError(t, err)
+	err = json.Unmarshal(data, &dna)
+	require.NoError(t, err)
+	return dna
+}
+
 func TestStats(t *testing.T) {
 	ctx := context.Background()
 
@@ -198,6 +216,6 @@ func setupMock(params mockArgs, mock *mock.Mock) {
 	if params.methodName != "" {
 		mock.On(params.methodName, params.inputArgs...).
 			Return(params.returnArgs...).
-			Times(1)
+			Times(params.times)
 	}
 }
