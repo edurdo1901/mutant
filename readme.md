@@ -1,4 +1,4 @@
-[![Build Status](https://github.com/edurdo1901/mutant/workflows/Go/badge.svg?branch=main)](https://github.com/edurdo1901/mutant/actions?query=branch%3Amain) [![Coverage Status](https://coveralls.io/repos/github/edurdo1901/mutant/badge.svg?branch=main)](https://coveralls.io/github/edurdo1901/mutant?branch=main)
+[![Build Status](https://github.com/edurdo1901/mutant/workflows/Build/badge.svg?branch=main)](https://github.com/edurdo1901/mutant/actions?query=branch%3Amain) [![Coverage Status](https://coveralls.io/repos/github/edurdo1901/mutant/badge.svg?branch=main)](https://coveralls.io/github/edurdo1901/mutant?branch=main)
 
 ## Requerimientos
 - docker
