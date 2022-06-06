@@ -164,6 +164,7 @@ func loadJSON(t *testing.T, fileName string) []string {
 	data, err := os.ReadFile(fileName)
 	require.NoError(t, err)
 	err = json.Unmarshal(data, &dna)
+	require.NoError(t, err)
 	return dna
 }
 
