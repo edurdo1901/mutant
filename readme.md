@@ -1,3 +1,5 @@
+[![Build Status](https://github.com/edurdo1901/mutant/workflows/Go/badge.svg?branch=main)](https://github.com/gin-gonic/gin/actions?query=branch%3Amaster)
+
 ## Requerimientos
 - docker
 - make
