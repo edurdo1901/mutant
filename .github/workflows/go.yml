@@ -30,4 +30,24 @@ jobs:
         compose-file: ./docker-compose.yml
     
     - name: Test
-      run: go test -v ./...
+      run: go test -v ./... -covermode=atomic -coverprofile=tmp/coverage.out -coverpkg=./... -count=1
+      
+    - name: Go Coverage Badge
+      # You may pin to the exact commit or the version.
+      # uses: tj-actions/coverage-badge-go@57e0c6b82e0bf6b0d486c4d8df22a51067f26fb7
+      uses: tj-actions/coverage-badge-go@v1.2
+      with:
+        # File containing the tests output
+        filename: tmp/coverage.out
+        # Color of the badge - green/yellow/red
+        color: green
+        # At what percentage does the badge become green instead of yellow (default: 70)
+        green: 80
+        # Target file (default "README.md")
+        target: README.md
+        # Text on the left side of the badge (default: "Coverage")
+        text: Coverage
+        # Text on the right side of the badge
+        value: test
+        # At what percentage does the badge become yellow instead of red (default 30)
+        yellow: 50
