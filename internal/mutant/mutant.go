@@ -12,7 +12,10 @@ import (
 	"prueba.com/internal/dnastore"
 )
 
-const _maxSecuence = 2
+const (
+	_maxSecuence       = 2
+	_maximumCharacters = 64
+)
 
 var (
 	_dnasequence     = []string{"CCCC", "AAAA", "TTTT", "GGGG"}
@@ -44,7 +47,7 @@ func (m *Mutant) IsMutant(ctx context.Context, dna []string) (bool, error) {
 		return isMutant, err
 	}
 
-	hash := hex.EncodeToString(newSHA256([]byte(dnaCompact)))
+	hash := getHash(dnaCompact)
 	dnaResult, err := m.repositoryDNA.Find(ctx, hash)
 	if err != nil {
 		return isMutant, err
@@ -93,12 +96,21 @@ func validateDna(dna []string) (string, error) {
 		}
 	}
 
-	dnaCompact := strings.Join(dna, "")
+	dnaCompact := strings.Join(dna, " ")
 	if regexValidateDna.Match([]byte(dnaCompact)) {
 		return "", ErrInvalidDna
 	}
 
 	return dnaCompact, nil
+}
+
+func getHash(dnaCompact string) string {
+	dnaCompact = strings.ReplaceAll(dnaCompact, " ", "")
+	if len(dnaCompact) <= _maximumCharacters {
+		return dnaCompact
+	}
+
+	return hex.EncodeToString(newSHA256([]byte(dnaCompact)))
 }
 
 // compute compute if the DNA entered is from a mutant.
