@@ -22,12 +22,20 @@ jobs:
       run: go build -v ./...
       
     - name: Docker Compose Action
-    # You may pin to the exact commit or the version.
-    # uses: isbang/compose-action@fab6f72bef82b75de541a7b9da1d23412953c2bd
       uses: isbang/compose-action@v1.0.0
       with:
-        # relative path to compose file
         compose-file: ./docker-compose.yml
     
     - name: Test
-      run: go test -v ./...
+      run: go test -race -covermode=atomic -coverprofile="profile.cov" ./...
+      
+    - name: actions-goveralls
+      # You may pin to the exact commit or the version.
+      # uses: shogo82148/actions-goveralls@31ee804b8576ae49f6dc3caa22591bc5080e7920
+      uses: shogo82148/actions-goveralls@v1.6.0
+      with:
+        # a path to your cover profile.
+        path-to-profile: profile.cov 
+      
+      
+      
