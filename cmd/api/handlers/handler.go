@@ -29,7 +29,7 @@ func (h *Handler) API(engine *gin.Engine) {
 	engine.GET("/", home)
 }
 
-// home
+// handler home
 func home(c *gin.Context) {
 	c.JSON(http.StatusOK, "Prueba mercado libre")
 }
