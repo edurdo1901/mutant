@@ -4,7 +4,7 @@
 
 ## Sitio de la aplicación
 
-[Prueba mercado libre](https://challenge-golang.gentlesea-9f37728d.westus.azurecontainerapps.io) `https://challenge-golang.gentlesea-9f37728d.westus.azurecontainerapps.io`
+[Prueba mercado libre](https://app-golang-mutant.prouddune-046dbdf6.eastus.azurecontainerapps.io) `https://app-golang-mutant.prouddune-046dbdf6.eastus.azurecontainerapps.io`
 
 ## Documentación API
 
