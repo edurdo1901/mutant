@@ -31,5 +31,5 @@ Para verificar la cobertura del código, se debe tener una instancia local de mo
 ___
 
 
-> **⚠ WARNING: Puede ser que el puerto 27017 este ocupado y por eso no logre ejecutar las pruebas unitarias. ** 
+***⚠ WARNING: Puede ser que el puerto 27017 este ocupado y por eso no logre ejecutar las pruebas unitarias. *** 
 
